@@ -33,13 +33,6 @@ string ConvertText(string s, Array var) {
 		encrypt += c1;
 		encrypt += c2;
 	}
-
-	vector<int> tmp;
-	for (int i = 0; i < encrypt.size(); i++) {
-		int val = (int)encrypt[i] - 65;
-		tmp.push_back(val);
-	}
-	
 	return encrypt;
 }
 
