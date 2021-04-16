@@ -1,3 +1,8 @@
+/* Created By
+			Asif Abdullah
+			14-04-2021
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -7,20 +12,19 @@ struct Array {
 
 bool flag = false;
 
-string ConvertText(string s, Array var) {
+string ConvertText(string Text, Array var) {
 	
 	string encrypt = "";
-	if (s.size() % 2) {
-		s += 'Z';
+	if (Text.size() % 2) {
+		Text += 'Z';
 		flag = true;
 	}
-	transform(s.begin(), s.end(), s.begin(), :: toupper);
+	transform(Text.begin(), Text.end(), Text.begin(), :: toupper);
 	vector<int> TextValue;
-	for (int i = 0; i < s.size(); i++) {
-		int val = (int)s[i] - 65;
+	for (int i = 0; i < Text.size(); i++) {
+		int val = (int)Text[i] - 65;
 		TextValue.push_back(val);
 	}
-	
 	for (int i = 0; i < TextValue.size(); i += 2) {
 		int a = var.ara[0][0] * TextValue[i];
 		int b = var.ara[0][1] * TextValue[i+1];
@@ -56,7 +60,6 @@ Array GetKDfromKE(Array var) {
 			break;
 		}
 	}
-
 	for (int i = 0; i < 2; i++) {
 		for (int j = 0; j < 2; j++) {
 			InverseKE.ara[i][j] *= t1;
@@ -65,17 +68,16 @@ Array GetKDfromKE(Array var) {
 				InverseKE.ara[i][j] += 26;
 		}
 	}
-	
 	return InverseKE; 
 }
 
 int main () {
 	//freopen("input.txt","r",stdin);
   //freopen("output.txt","w",stdout);
-  string s;
+  string Text;
   Array KE;
   cout << "Enter Your Text : "; 
- 	cin >> s;
+ 	cin >> Text;
  	cout << "Enter Your Key :" << endl;
  	bool valid = true;
 	while (valid) {
@@ -93,11 +95,10 @@ int main () {
 			cout << "This key matrix is invaild. Please try another one" << endl;
 		}
 	}
- 	cout << "Encrypted Text is : ";
- 	string encryptText = ConvertText(s, KE);
-
+ 	string encryptText = ConvertText(Text, KE);
  	string encrypt = encryptText;
  	if (flag) encrypt.pop_back();
+ 	cout << "Encrypted Text is : ";
  	cout << encrypt << endl;
 
  	Array KD;
