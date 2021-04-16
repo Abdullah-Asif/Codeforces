@@ -77,13 +77,22 @@ int main () {
   cout << "Enter Your Text : "; 
  	cin >> s;
  	cout << "Enter Your Key :" << endl;
- 
-	for (int i = 0; i < 2; i++) {
-		for (int j = 0; j < 2; j++) {
-			cin >> KE.ara[i][j];
+ 	bool valid = true;
+	while (valid) {
+		for (int i = 0; i < 2; i++) {
+ 			for (int j = 0; j < 2; j++) {
+ 				cin >> KE.ara[i][j];
+ 			}
+ 		}
+ 		int D = (KE.ara[0][0] * KE.ara[1][1]) - (KE.ara[0][1] * KE.ara[1][0]);
+		if (D < 0) D += 26;
+		for (int i = 1; i < 26; i++) {
+			if ((D * i) % 26 == 1) valid = false;
+		}
+		if (valid) {
+			cout << "This key matrix is invaild. Please try another one" << endl;
 		}
 	}
- 
  	cout << "Encrypted Text is : ";
  	string encryptText = ConvertText(s, KE);
 
